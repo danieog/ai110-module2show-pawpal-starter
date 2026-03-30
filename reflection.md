@@ -3,14 +3,68 @@
 ## 1. System Design
 
 **a. Initial design**
+    Three core actions that my app should do is let users is add a pet and themselves, add walks and/or any other aspects of their schedule, and add tasks. I would like to have a class dedicated to having pet information, schedule events and any tasks respectively. 
+    Building blocks:
+        Attritbutes:
+        - Owners
+        - Tasks
+        - Pets
+        - Schedules
+        Methods:
+        - Adding/editing tasks
+        - Adding/removing pets to owners
+        - Adding information about pets and owners
+        - Adjusting the schedule with new tasks
+        - Sending reminders about each task
+        - Sorting tasks by due dates
 
-- Briefly describe your initial UML design.
-- What classes did you include, and what responsibilities did you assign to each?
+**c. Mermaid class diagram**
+
+```mermaid
+classDiagram
+    class Owner {
+        +pets: List~Pet~
+        +tasks: List~Task~
+        +schedules: List~Scheduler~
+        +addOwnerInfo(name, contact)
+        +addPet(pet: Pet)
+        +removePet(pet: Pet)
+    }
+
+    class Pet {
+        +name: string
+        +species: string
+        +age: int
+        +addPetInfo(info)
+    }
+
+    class Task {
+        +title: string
+        +dueDate: datetime
+        +status: string
+        +addTask(taskInfo)
+        +editTask(taskInfo)
+    }
+
+    class Scheduler {
+        +tasks: List~Task~
+        +adjustSchedule(task: Task)
+        +sendReminder(task: Task)
+        +sortTasksByDueDate()
+    }
+
+    Owner "1" --> "0..*" Pet : owns
+    Owner "1" --> "0..*" Task : manages
+    Owner "1" --> "0..*" Scheduler : uses
+    Scheduler "1" --> "0..*" Task : schedules
+    Pet "1" --> "0..*" Task : needs
+```
 
 **b. Design changes**
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
+My design did change during implemention, since I _____.
 
 ---
 
