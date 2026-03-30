@@ -64,7 +64,7 @@ classDiagram
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
-My design did change during implemention, since I _____.
+My design did not change much during implementation.
 
 ---
 
