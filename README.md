@@ -31,7 +31,8 @@ python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
-
+### Smarter Scheduling
+These now allow us to check the task priority scoring, making sure all tasks reoccur in the order they should, making sure that there's no overlapping tasks, respecting the time we have per day, grouping tasks within the same time window to utilize time efficiently and much more.
 ### Suggested workflow
 
 1. Read the scenario carefully and identify requirements and edge cases.
