@@ -23,41 +23,57 @@
 ```mermaid
 classDiagram
     class Owner {
+        +name: string
+        +contact: string
         +pets: List~Pet~
-        +tasks: List~Task~
         +schedules: List~Scheduler~
+        +available_minutes_per_day: int
         +addOwnerInfo(name, contact)
         +addPet(pet: Pet)
         +removePet(pet: Pet)
+        +build_task_to_pet_map()
     }
 
     class Pet {
         +name: string
         +species: string
         +age: int
+        +tasks: List~Task~
         +addPetInfo(info)
+        +addTask(task: Task)
+        +removeTask(task: Task)
     }
 
     class Task {
-        +title: string
-        +dueDate: datetime
-        +status: string
+        +description: string
+        +task_time: time
+        +frequency: string
+        +is_completed: bool
+        +priority: TaskPriority
         +addTask(taskInfo)
         +editTask(taskInfo)
+        +mark_complete()
+        +mark_missed()
+        +calculate_score(now)
+        +create_next_instance()
     }
 
     class Scheduler {
-        +tasks: List~Task~
-        +adjustSchedule(task: Task)
-        +sendReminder(task: Task)
-        +sortTasksByDueDate()
+        +schedule_explanations: List~ScheduleExplanation~
+        +filter_tasks(owner, ...)
+        +sort_by_time(tasks)
+        +detect_time_conflicts(owner)
+        +get_conflict_warnings(owner)
+        +build_daily_schedule(owner)
+        +batch_similar_tasks(tasks, time_window_minutes)
+        +check_spacing_constraint(task, scheduled_tasks)
+        +get_reminders_due(scheduled_tasks, current_time)
     }
 
     Owner "1" --> "0..*" Pet : owns
-    Owner "1" --> "0..*" Task : manages
-    Owner "1" --> "0..*" Scheduler : uses
+    Owner "1" --> "0..*" Scheduler : registers
+    Pet "1" --> "0..*" Task : holds
     Scheduler "1" --> "0..*" Task : schedules
-    Pet "1" --> "0..*" Task : needs
 ```
 
 **b. Design changes**
